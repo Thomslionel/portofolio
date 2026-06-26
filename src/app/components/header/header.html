@@ -1,14 +1,20 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
-
 <header class="header">
-    <a href="#" class="logo">Portfolio<span>.</span></a>
+    <a [routerLink]="['/']" fragment="about" class="logo" (click)="isMenuOpen = false">Portfolio<span>.</span></a>
 
-    <input type="checkbox" id="menu-bar">
-    <label for="menu-bar" class="fas fa-bars" id="menu-icon"></label>
+    <div id="menu-icon" (click)="isMenuOpen = !isMenuOpen" [class.active]="isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-    <nav class="navbar">
+    <nav class="navbar" [class.open]="isMenuOpen">
         @for (item of menus; track item.nom) {
-            <a [routerLink]="['/']" [fragment]="item.url" routerLinkActive="active">{{item.nom}}</a>
+            <a [routerLink]="['/']" 
+               [fragment]="item.url" 
+               routerLinkActive="active" 
+               (click)="isMenuOpen = false">
+               {{item.nom}}
+            </a>
         }
     </nav>
 </header>

@@ -9,14 +9,15 @@
 
 .about-section {
     min-height: 100vh;
-    display: flex;         /* Réactivé : Indispensable pour distribuer l'espace */
-    align-items: center;   /* Réactivé : Centre verticalement le conteneur */
-    justify-content: center; /* Réactivé : Centre horizontalement le conteneur */
-    width: 100%;           /* Force la section à occuper tout l'écran */
-    padding: clamp(5rem, 8vh, 10rem) 5% clamp(4rem, 6vh, 8rem);
+    display: flex;         
+    align-items: center;   
+    justify-content: center; 
+    width: 100%;           
+    padding: clamp(4rem, 8vh, 10rem) 5%;
     background: #0a0a1a;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 /* --- Fond avec formes géométriques animées --- */
@@ -57,17 +58,17 @@
     100% { transform: translate(0, 0) rotate(360deg); }
 }
 
-/* --- Conteneur principal --- */
+/* --- Conteneur principal (Grille adaptive sécurisée) --- */
 .about-container {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.5fr);
     gap: clamp(2rem, 5vw, 5rem);
     max-width: 1200px;
-    width: 100%;           /* Occupe 100% de la largeur disponible */
-    margin: 0 auto;        /* Centre parfaitement la grille si l'écran dépasse 1200px */
+    width: 100%;           
+    margin: 0 auto;        
     position: relative;
     z-index: 1;
-    align-items: center;   /* Réactivé : Aligne l'image et le texte sur le même axe horizontal */
+    align-items: center;   
 }
 
 /* ============================================
@@ -209,7 +210,8 @@
 .about-content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: clamp(1.2rem, 2.5vh, 1.8rem);
+    width: 100%;
 }
 
 .about-content .title {
@@ -228,7 +230,7 @@
 }
 
 .about-content .description {
-    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
     line-height: 1.8;
     color: #c8c8d4;
     font-weight: 300;
@@ -252,22 +254,24 @@
     50% { opacity: 0; }
 }
 
-/* --- Statistiques --- */
+/* --- Statistiques Floues --- */
 .about-stats {
     display: flex;
-    gap: clamp(1.5rem, 3vw, 3rem);
+    gap: clamp(1.5rem, 4vw, 3rem);
     flex-wrap: wrap;
     margin-top: 0.5rem;
+    width: 100%;
 }
 
 .stat-item {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+    min-width: 100px;
 }
 
 .stat-number {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
     font-weight: 700;
     color: #ffffff;
     letter-spacing: -0.5px;
@@ -287,18 +291,19 @@
     font-weight: 400;
 }
 
-/* --- Boutons --- */
+/* --- Boutons Pill --- */
 .about-actions {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     margin-top: 1rem;
+    width: 100%;
 }
 
 .btn-primary,
 .btn-secondary {
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
+    padding: 0.8rem 2.2rem;
+    border-radius: 50px; /* Uniformisation en style "pill" arrondi */
     font-size: 0.95rem;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
@@ -309,6 +314,7 @@
     text-decoration: none;
     border: none;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .btn-primary {
@@ -336,8 +342,10 @@
 }
 
 /* ============================================
-   RESPONSIVE LAYOUT BREAKPOINTS
+   RESPONSIVE LAYOUT BREAKPOINTS OPTIMISÉ
    ============================================ */
+
+/* Écrans Intermédiaires / Tablettes Horizontales */
 @media (max-width: 1024px) {
     .about-container {
         grid-template-columns: 1fr 1.2fr;
@@ -345,19 +353,21 @@
     }
 }
 
-@media (max-width: 868px) {
+/* Tablettes Verticales & Petits Écrans (Bascule en une colonne propre) */
+@media (max-width: 920px) {
     .about-section {
-        padding-top: 7rem;
+        padding: 6rem 5% 4rem;
     }
 
     .about-container {
-        grid-template-columns: 1fr; /* Passage sur une seule colonne */
+        grid-template-columns: 1fr; /* Passage sur une seule colonne unique */
         text-align: center;
-        gap: 3rem;
+        gap: 3.5rem;
+        max-width: 650px; /* Aligne le comportement sur la section contact */
     }
 
     .about-img-box {
-        max-width: 320px;
+        max-width: 340px;
         margin: 0 auto;
     }
 
@@ -366,50 +376,56 @@
     }
 
     .about-content .description {
-        text-align: center;
+        text-align: center; /* Centrage uniforme de la description pour l'harmonie */
     }
 
     .about-stats {
         justify-content: center;
-        width: 100%;
     }
 
     .about-actions {
         justify-content: center;
-        width: 100%;
     }
 }
 
-@media (max-width: 480px) {
+/* Téléphones Portables (Mobiles < 576px) */
+@media (max-width: 576px) {
     .about-section {
-        padding-left: 6%;
-        padding-right: 6%;
+        padding: 4rem 4% 3rem;
     }
 
     .about-img-box {
-        max-width: 260px;
+        max-width: 280px;
     }
 
     .floating-badge {
         font-size: 0.65rem;
         padding: 0.4rem 1rem;
-        bottom: 10px;
-        right: 10px;
+        bottom: 12px;
+        right: 12px;
+    }
+    
+    /* Grille 2x2 propre pour les statistiques sur mobile */
+    .about-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem 1rem;
+        text-align: center;
+    }
+    
+    .stat-item {
+        min-width: unset;
     }
 
+    /* Boutons fluides et larges empilés sur mobile */
     .about-actions {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.8rem;
     }
 
     .btn-primary,
     .btn-secondary {
         width: 100%;
-    }
-    
-    .about-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Grille 2x2 harmonieuse */
-        gap: 1.5rem;
     }
 }

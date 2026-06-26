@@ -12,10 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class Header {
 
-  menus : Menu [] = [];
 
-  constructor(private menuService : MenuService) {
-   
+  isMenuOpen = false;
+  menus: Menu[] = [];
+
+  constructor(private menuService: MenuService) {
+
   }
 
   ngOnInit(): void {
