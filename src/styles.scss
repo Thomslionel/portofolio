@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================
+   RESET & VARIABLES GLOBALES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+:root {
+    --primary: #7c3aed;
+    --primary-light: #a78bfa;
+    --primary-dark: #5b21b6;
+    --bg-dark: #0f0e17;
+    --bg-card: #1a1932;
+    --bg-card-hover: #24224a;
+    --text-white: #fffffe;
+    --text-light: #a7a9be;
+    --text-muted: #6b6b8a;
+    --border-glow: rgba(124, 58, 237, 0.3);
+    --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.15);
+    --radius: 20px;
+    --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-white);
+    line-height: 1.6;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+
+/* ---- Sélection ---- */
+::selection {
+    background: var(--primary);
+    color: var(--text-white);
+}

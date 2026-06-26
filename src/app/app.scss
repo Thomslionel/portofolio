@@ -1,0 +1,39 @@
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--bg-dark); /* Couleur de fond sombre */
+}
+
+
+.app-content {
+    flex: 1;
+    margin-top: 80px; /* Hauteur du header (ajuste si besoin) */
+    display: flex;
+    flex-direction: column;
+}
+
+.app-content app-about {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================
+   GESTION RESPONSIVE (ajustement du margin-top)
+   ============================================ */
+
+/* Sur les petits écrans, le header est souvent plus haut (menu hamburger) */
+@media (max-width: 868px) {
+    .app-content {
+        margin-top: 70px; /* Légèrement moins haut sur mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .app-content {
+        margin-top: 60px;
+    }
+}

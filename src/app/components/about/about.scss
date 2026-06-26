@@ -1,0 +1,415 @@
+/* ============================================
+   ABOUT SECTION – DESIGN HOLOGRAMME INTERACTIF
+   ============================================ */
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.about-section {
+    min-height: 100vh;
+    display: flex;         /* Réactivé : Indispensable pour distribuer l'espace */
+    align-items: center;   /* Réactivé : Centre verticalement le conteneur */
+    justify-content: center; /* Réactivé : Centre horizontalement le conteneur */
+    width: 100%;           /* Force la section à occuper tout l'écran */
+    padding: clamp(5rem, 8vh, 10rem) 5% clamp(4rem, 6vh, 8rem);
+    background: #0a0a1a;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Fond avec formes géométriques animées --- */
+.about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(0, 255, 200, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(120, 80, 255, 0.08) 0%, transparent 50%);
+    z-index: 0;
+    animation: bgPulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+
+.about-section::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: clamp(150px, 20vw, 300px);
+    height: clamp(150px, 20vw, 300px);
+    background: radial-gradient(circle, rgba(120, 80, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatOrb 15s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(50px, -40px) rotate(120deg); }
+    66% { transform: translate(-25px, 60px) rotate(240deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* --- Conteneur principal --- */
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    max-width: 1200px;
+    width: 100%;           /* Occupe 100% de la largeur disponible */
+    margin: 0 auto;        /* Centre parfaitement la grille si l'écran dépasse 1200px */
+    position: relative;
+    z-index: 1;
+    align-items: center;   /* Réactivé : Aligne l'image et le texte sur le même axe horizontal */
+}
+
+/* ============================================
+   BLOC IMAGE – EFFET HOLOGRAMME
+   ============================================ */
+.about-img-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    width: 100%;
+}
+
+/* --- Wrapper pour superposition des calques --- */
+.hologram-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(120, 80, 255, 0.1);
+    transition: box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hologram-wrapper:hover {
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(120, 80, 255, 0.25);
+}
+
+/* --- Image principale --- */
+.hologram-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+    filter: saturate(0.9) contrast(1.05);
+    animation: scanReveal 1.5s ease forwards;
+}
+
+@keyframes scanReveal {
+    0% { clip-path: inset(100% 0 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+}
+
+.hologram-wrapper:hover img {
+    transform: scale(1.03);
+    filter: saturate(1.1) contrast(1.1) brightness(0.95);
+}
+
+/* --- Ligne de scan animée --- */
+.scan-line {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(120, 80, 255, 0.04) 2px,
+        rgba(120, 80, 255, 0.04) 4px
+    );
+    z-index: 2;
+    animation: scanMove 4s linear infinite;
+}
+
+@keyframes scanMove {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* --- Overlay de glitch --- */
+.glitch-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(255, 0, 150, 0.08), transparent 40%, transparent 60%, rgba(0, 200, 255, 0.08));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+    mix-blend-mode: overlay;
+}
+
+.hologram-wrapper:hover .glitch-overlay {
+    opacity: 1;
+    animation: glitchFlash 0.4s steps(2, start) infinite;
+}
+
+@keyframes glitchFlash {
+    0%, 100% { transform: translate(0, 0); filter: hue-rotate(0deg); }
+    50% { transform: translate(-3px, 2px); filter: hue-rotate(90deg); }
+}
+
+/* --- Particules de données --- */
+.data-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 20% 40%, rgba(0, 255, 200, 0.03) 0%, transparent 30%),
+        radial-gradient(circle at 80% 60%, rgba(120, 80, 255, 0.03) 0%, transparent 30%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.hologram-wrapper:hover .data-particles {
+    opacity: 1;
+}
+
+/* --- Badge flottant stylisé --- */
+.floating-badge {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(11, 11, 30, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(120, 80, 255, 0.4);
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    color: #a78bfa;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    animation: badgeFloat 4s ease-in-out infinite;
+    z-index: 5;
+}
+
+@keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* ============================================
+   BLOC CONTENU – TEXTE & STATS
+   ============================================ */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-content .title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.about-content .title span {
+    background: linear-gradient(135deg, #00ffc8, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-content .description {
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.8;
+    color: #c8c8d4;
+    font-weight: 300;
+    max-width: 640px;
+    text-align: justify;
+}
+
+.about-content .description .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background: #00ffc8;
+    margin-left: 4px;
+    vertical-align: text-bottom;
+    animation: blink 0.8s step-end infinite;
+    box-shadow: 0 0 10px rgba(0, 255, 200, 0.8);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- Statistiques --- */
+.about-stats {
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-number {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+
+.stat-suffix {
+    color: #00ffc8;
+    margin-left: 2px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #a7a9be;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+/* --- Boutons --- */
+.about-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(120, 80, 255, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(120, 80, 255, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(120, 80, 255, 0.06);
+    color: #c4b5fd;
+    border: 1px solid rgba(120, 80, 255, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.btn-secondary:hover {
+    background: rgba(120, 80, 255, 0.15);
+    transform: translateY(-3px);
+    border-color: rgba(120, 80, 255, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE LAYOUT BREAKPOINTS
+   ============================================ */
+@media (max-width: 1024px) {
+    .about-container {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 868px) {
+    .about-section {
+        padding-top: 7rem;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr; /* Passage sur une seule colonne */
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .about-img-box {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .about-content {
+        align-items: center;
+    }
+
+    .about-content .description {
+        text-align: center;
+    }
+
+    .about-stats {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .about-actions {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .about-img-box {
+        max-width: 260px;
+    }
+
+    .floating-badge {
+        font-size: 0.65rem;
+        padding: 0.4rem 1rem;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .about-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+    
+    .about-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Grille 2x2 harmonieuse */
+        gap: 1.5rem;
+    }
+}

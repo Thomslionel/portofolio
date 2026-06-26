@@ -1,0 +1,334 @@
+/* ============================================
+   CONTACT SECTION – ALIGNÉE SUR LES SERVICES
+   ============================================ */
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.contact-section {
+    padding: clamp(5rem, 8vh, 10rem) 5% clamp(4rem, 6vh, 8rem);
+    background: #0a0a1a; /* Même couleur de fond sombre */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Éléments d'arrière-plan de lueur radiale (coordonnés) */
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(120, 80, 255, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.contact-section::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 255, 200, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ---- En-tête ---- */
+.contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-header .heading {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.contact-header .heading span {
+    background: linear-gradient(135deg, #a78bfa, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.contact-header .sub-heading {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    color: #a7a9be;
+    margin-top: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* ---- Conteneur de Grille Principal ---- */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    align-items: start;
+}
+
+/* ---- Cartes d'informations latérales ---- */
+.contact-info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: rgba(26, 25, 50, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 1.5rem;
+    border: 1px solid rgba(120, 80, 255, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(120, 80, 255, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(120, 80, 255, 0.08);
+}
+
+/* Conteneur d'icône identique aux cartes services */
+.card-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: rgba(120, 80, 255, 0.12);
+    border-radius: 16px;
+    flex-shrink: 0;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.info-card:hover .card-visual {
+    background: rgba(120, 80, 255, 0.22);
+    transform: scale(1.05);
+}
+
+.service-icon {
+    font-size: 1.8rem;
+    color: #a78bfa;
+}
+
+.info-details h4 {
+    font-size: 0.85rem;
+    color: #c4b5fd;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 0.2rem 0;
+}
+
+.info-details p {
+    color: #ffffff;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.status-pulse {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: #00ffc8;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #00ffc8;
+        animation: pulse 1.5s infinite;
+    }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.6; transform: scale(0.9); }
+}
+
+/* ---- Panneau du Formulaire de contact ---- */
+.contact-form-panel {
+    background: rgba(26, 25, 50, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: clamp(1.8rem, 4vw, 3rem);
+    border: 1px solid rgba(120, 80, 255, 0.12);
+    transition: border-color 0.3s ease;
+}
+
+.contact-form-panel:focus-within {
+    border-color: rgba(120, 80, 255, 0.3);
+}
+
+.cyber-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.cyber-form label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #a78bfa;
+    letter-spacing: 0.5px;
+}
+
+.cyber-form input, 
+.cyber-form textarea {
+    background: rgba(10, 10, 26, 0.6);
+    border: 1px solid rgba(120, 80, 255, 0.15);
+    border-radius: 12px;
+    padding: 0.9rem 1.2rem;
+    color: #ffffff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.cyber-form input:focus, 
+.cyber-form textarea:focus {
+    outline: none;
+    border-color: #a78bfa;
+    background: rgba(10, 10, 26, 0.8);
+    box-shadow: 0 0 15px rgba(120, 80, 255, 0.1);
+}
+
+.cyber-form .input-error {
+    border-color: #ef4444 !important;
+}
+
+.cyber-form .error-msg {
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 0.1rem;
+}
+
+/* ---- Alertes Style Terminal ---- */
+.terminal-alert {
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid;
+    background: rgba(26, 25, 50, 0.6);
+}
+
+.terminal-alert.success {
+    color: #10b981;
+    border-color: #10b981;
+}
+
+.terminal-alert.error {
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+/* ---- Bouton de soumission harmonisé ---- */
+.btn-submit {
+    width: 100%;
+    padding: 1rem 2.2rem;
+    border-radius: 50px; /* Même style arrondi "pill" que tes boutons ou tags */
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 25px rgba(120, 80, 255, 0.3);
+}
+
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 40px rgba(120, 80, 255, 0.4);
+}
+
+.btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .contact-container {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 2rem;
+    }
+    .contact-header .heading {
+        font-size: 2.4rem;
+    }
+}
+
+/* Mobiles intermédiaires / Tablettes verticales */
+@media (max-width: 868px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        max-width: 650px;
+    }
+    
+    .contact-info-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .info-card {
+        flex: 1 1 240px;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 3rem 5% 3rem;
+    }
+    
+    .contact-header .heading {
+        font-size: 1.8rem;
+    }
+    
+    .contact-info-panel {
+        flex-direction: column;
+    }
+    
+    .info-card {
+        width: 100%;
+    }
+    
+    .contact-form-panel {
+        padding: 1.5rem 1.2rem;
+        border-radius: 18px;
+    }
+}

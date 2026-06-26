@@ -1,0 +1,18 @@
+<section class="about-section" *ngIf="personne">
+  <div class="about-container">
+    
+    <div class="about-img-box">
+      <img [src]="personne.imageUrl || 'assets/photo.jpeg'" alt="Photo de {{ personne.prenom }} {{ personne.nom }}">
+    </div>
+
+    <div class="about-content">
+      <!-- <h2 class="heading">À Propos de <span>Moi</span></h2> -->
+      <h1 class="title">Je suis {{ personne.prenom }} {{ personne.nom }}, <span>{{ personne.profession }} </span> </h1>
+      
+      <p class="description">
+        {{ txtAffiche }}<span class="cursor">|</span>
+      </p>
+    </div>
+
+  </div>
+</section>

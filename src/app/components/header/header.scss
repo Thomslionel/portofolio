@@ -1,0 +1,159 @@
+/* ============================================
+   HEADER / NAVBAR
+   ============================================ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(15, 14, 23, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+    transition: var(--transition);
+}
+
+.header .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-white);
+}
+
+.header .logo span {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+/* ---- Navigation ---- */
+.header .navbar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header .navbar a {
+    position: relative;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: var(--transition);
+    padding: 0.3rem 0;
+}
+
+.header .navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.header .navbar a:hover {
+    color: var(--text-white);
+}
+
+.header .navbar a:hover::after {
+    width: 100%;
+}
+
+.header .navbar a.active {
+    color: var(--text-white);
+}
+
+.header .navbar a.active::after {
+    width: 100%;
+}
+
+/* ---- Menu mobile (checkbox + icône) ---- */
+#menu-bar {
+    display: none;
+}
+
+#menu-icon {
+    display: none;
+    font-size: 1.8rem;
+    color: var(--text-white);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#menu-icon:hover {
+    color: var(--primary);
+}
+
+/* ---- Responsive mobile ---- */
+@media (max-width: 868px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(15, 14, 23, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        padding: 1.5rem 0;
+        gap: 0;
+        border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+        transform: scaleY(0);
+        transform-origin: top center;
+        transition: var(--transition);
+        opacity: 0;
+        pointer-events: none;
+        border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .header .navbar a {
+        padding: 0.8rem 2rem;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        font-size: 1.1rem;
+    }
+
+    .header .navbar a:last-child {
+        border-bottom: none;
+    }
+
+    .header .navbar a::after {
+        display: none;
+    }
+
+    .header .navbar a:hover {
+        background: rgba(124, 58, 237, 0.08);
+        color: var(--text-white);
+    }
+
+    #menu-bar:checked ~ .navbar {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    #menu-bar:checked ~ #menu-icon {
+        color: var(--primary);
+    }
+}
+
+@media (max-width: 480px) {
+    .header .logo {
+        font-size: 1.4rem;
+    }
+    #menu-icon {
+        font-size: 1.5rem;
+    }
+}

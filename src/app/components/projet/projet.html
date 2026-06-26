@@ -1,0 +1,30 @@
+<section class="portfolio-section" id="projets">
+  
+  <!-- En-tête de la section -->
+  <div class="portfolio-header">
+    <h2 class="heading"> Mes <span>PROJETS</span></h2>
+    <p class="sub-heading">Découvrez mes réalisations en ingénierie logicielle, architecture et IA.</p>
+  </div>
+
+  <!-- Grille des projets -->
+  <div class="portfolio-grid">
+    
+    @for (projet of listeProjets; track projet.nom) {
+      <div class="project-card">
+        
+        <!-- Conteneur Image -->
+        <div class="project-img-box">
+          <img [src]="projet.imageUrl" [alt]="projet.nom">
+        </div>
+
+        <!-- Conteneur Infos -->
+        <div class="project-info">
+          <h3>{{ projet.nom }}</h3>
+          <p class="description">{{ projet.description }}</p>
+        </div>
+
+      </div>
+    }
+
+  </div>
+</section>

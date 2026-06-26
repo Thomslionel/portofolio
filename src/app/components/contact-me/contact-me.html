@@ -1,0 +1,107 @@
+<section class="contact-section" id="contact">
+  
+  <div class="contact-header">
+    <h2 class="heading">Contact<span>_ME</span></h2>
+    <p class="sub-heading">Un projet ? Une opportunité ? Initialisons la connexion.</p>
+  </div>
+
+  <div class="contact-container">
+    
+    <div class="contact-info-panel">
+      <div class="info-card">
+        <div class="card-visual">
+          <i class="fa-solid fa-terminal service-icon"></i>
+        </div>
+        <div class="info-details">
+          <h4>Statut disponible</h4>
+          <p class="status-pulse">Prêt pour de nouveaux défis</p>
+        </div>
+      </div>
+      
+      <div class="info-card">
+        <div class="card-visual">
+          <i class="fa-solid fa-envelope-open-text service-icon"></i>
+        </div>
+        <div class="info-details">
+          <h4>Email Direct</h4>
+          <p>ton.email&#64;exemple.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-panel">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="cyber-form">
+        
+        <div class="form-group">
+          <label for="name">_NOM_COMPLET</label>
+          <input 
+            type="text" 
+            id="name" 
+            formControlName="name" 
+            placeholder="John Doe"
+            [ngClass]="{'input-error': contactForm.get('name')?.touched && contactForm.get('name')?.invalid}">
+          @if (contactForm.get('name')?.touched && contactForm.get('name')?.invalid) {
+            <span class="error-msg">Le nom est requis (2 caractères min).</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="email">_EMAIL_ADDRESS</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="john.doe&#64;example.com"
+            [ngClass]="{'input-error': contactForm.get('email')?.touched && contactForm.get('email')?.invalid}">
+          @if (contactForm.get('email')?.touched && contactForm.get('email')?.invalid) {
+            <span class="error-msg">Veuillez entrer une adresse email valide.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="subject">_SUJET</label>
+          <input 
+            type="text" 
+            id="subject" 
+            formControlName="subject" 
+            placeholder="Opportunité de projet / Recrutement"
+            [ngClass]="{'input-error': contactForm.get('subject')?.touched && contactForm.get('subject')?.invalid}">
+          @if (contactForm.get('subject')?.touched && contactForm.get('subject')?.invalid) {
+            <span class="error-msg">Le sujet est obligatoire.</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="message">_MESSAGE</label>
+          <textarea 
+            id="message" 
+            formControlName="message" 
+            rows="5" 
+            placeholder="Décrivez votre projet en quelques lignes..."
+            [ngClass]="{'input-error': contactForm.get('message')?.touched && contactForm.get('message')?.invalid}"></textarea>
+          @if (contactForm.get('message')?.touched && contactForm.get('message')?.invalid) {
+            <span class="error-msg">Le message doit contenir au moins 10 caractères.</span>
+          }
+        </div>
+
+        @if (submitSuccess) {
+          <div class="terminal-alert success">
+            <p>> TRANSMISSION RÉUSSIE. Je vous réponds dans les plus brefs délais.</p>
+          </div>
+        }
+        @if (submitError) {
+          <div class="terminal-alert error">
+            <p>> ERREUR RÉSEAU. Échec de la transmission. Réessayez ou utilisez l'email direct.</p>
+          </div>
+        }
+
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+          <span>{{ isSubmitting ? 'TRANSMISSION...' : 'TRANSMETTRE_LE_MESSAGE' }}</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,114 @@
+.footer {
+  width: 100%;
+  background-color: #0f172a; /* Fond sombre */
+  padding: 2.5rem 10%;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Texte du Copyright */
+.footer-text {
+  p {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    
+    span {
+      color: #10b981; /* Accent Vert Émeraude */
+      font-weight: 600;
+    }
+  }
+}
+
+/* Zone des Liens de Contact & Réseaux */
+.footer-contacts {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .contact-item {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+
+    i {
+      color: #10b981; /* Icônes en vert émeraude */
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    span {
+      font-weight: 500;
+    }
+
+    &:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+
+      i {
+        transform: scale(1.15); /* Léger coup de boost sur l'icône au survol */
+      }
+    }
+  }
+}
+
+/* Bouton de retour en haut */
+.footer-iconTop {
+  a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    background-color: #10b981;
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #059669;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+  }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
+  .footer {
+    padding: 2.5rem 5%;
+  }
+  .footer-contacts {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .footer-contacts {
+    flex-direction: column; /* Aligné verticalement sur smartphone */
+    gap: 1.2rem;
+  }
+
+  .footer-iconTop {
+    order: -1; /* La flèche passe tout en haut sur mobile pour le confort utilisateur */
+  }
+}
